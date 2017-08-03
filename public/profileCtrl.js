@@ -1,4 +1,15 @@
 angular.module('userProfiles')
-.controller('profileCtrl', function( $scope ) {
-	// FIX ME - assign values to $scope.currentUser and $scope.friends
-});
+  .factory('friendService', function ($http) {
+    return {
+
+      login: function (user) {
+        return $http.post('/api/login', user)
+      },
+
+      getFriends () {
+        return $http.get('/api/profiles').then(function (response) {
+    	return response.data
+    	})
+      }
+    }
+  })
